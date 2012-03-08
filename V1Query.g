@@ -46,16 +46,32 @@ now_only
 	;
 
 attribute_filter
-	: '[' filter_criteria ']'
+	: '[' filter_term ']'
 	;
 
-filter_criteria
-	: 
+filter_term 
+	: (filter_term  (logical_op  filter_term)+)  | simple_filter_term | grouped_filter_term 
 	;
 
+grouped_filter_term
+	:	'(' filter_term ')'
+	;
+	
 simple_filter_term
 	: (attribute_name binary_operator (filter_value_list | variable | context_asset) ) | (unary_operator? attribute_name)
 	;
+
+
+logical_op
+	: and_op | or_op
+	;
+
+or_op	: '|'
+	;
+
+and_op	: '&' | ';'
+	;
+
 
 unary_operator
 	: '+' | '-'
