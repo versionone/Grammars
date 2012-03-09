@@ -38,7 +38,7 @@ desc_sort_token_term
 	;
 
 filter2_token
-	: filter_expr? EOF
+	: filter_expression? EOF
 	;
 
 attribute_selection_token
@@ -66,16 +66,16 @@ now_only
 	;
 
 attribute_filter
-	: '[' filter_expr ']'
+	: '[' filter_expression ']'
 	;
 
-filter_expr 
-	: ( simple_filter_term | grouped_filter_term ) ( ( and_op | or_op ) filter_expr)?
+filter_expression 
+	: ( simple_filter_term | grouped_filter_term ) ( ( and_operator | or_operator ) filter_expression)?
 	;
 
 	
 grouped_filter_term
-	:	'(' filter_expr ')'
+	:	'(' filter_expression ')'
 	;
 	
 simple_filter_term
@@ -83,10 +83,10 @@ simple_filter_term
 	| unary_operator attribute_name
 	;
 
-or_op	: '|'
+or_operator	: '|'
 	;
 
-and_op	: '&' | ';'
+and_operator	: '&' | ';'
 	;
 
 variable 
