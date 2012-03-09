@@ -70,7 +70,7 @@ attribute_filter
 	;
 
 filter_expr 
-	: ( simple_filter_term | grouped_filter_term ) (logical_op filter_expr)?
+	: ( simple_filter_term | grouped_filter_term ) ( ( and_op | or_op ) filter_expr)?
 	;
 
 	
@@ -79,22 +79,20 @@ grouped_filter_term
 	;
 	
 simple_filter_term
-	: ( attribute_name  ( BINARY_OPERATOR ( filter_value_list | VARIABLE | CONTEXT_ASSET ) )? )
-	| UNARY_OPERATOR attribute_name
+	: ( attribute_name  ( binary_operator ( filter_value_list | variable ) )? )
+	| unary_operator attribute_name
 	;
 
-logical_op
-	: AND_OP | OR_OP
+or_op	: '|'
 	;
 
-OR_OP	: '|'
+and_op	: '&' | ';'
 	;
 
-AND_OP	: '&' | ';'
-	;
+variable 
+	:	VARIABLE_NAME | CONTEXT_ASSET ;
 
-
-UNARY_OPERATOR
+unary_operator
 	: '+' | '-'
 	;
 
@@ -118,11 +116,11 @@ CONTEXT_ASSET
 	: '$'
 	;
 
-VARIABLE
+VARIABLE_NAME
 	: '$' NAME
 	;
 
-BINARY_OPERATOR
+binary_operator
 	: '!=' | '>' | '>=' | '<' | '<=' | '='
 	;
 
