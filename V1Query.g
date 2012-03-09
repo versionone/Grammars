@@ -6,7 +6,7 @@ grammar V1Query;
 
 
 filter_context_token
-	:
+	: 
 	;
 
 paging_token
@@ -18,15 +18,15 @@ sort_token
 	;
 
 filter2_token
-	:
+	: filter_expr EOF
 	;
 
 attribute_selection_token
-	:
+	: attribute_name ( ',' attribute_name)* EOF
 	;
 
 attribute_definition_token
-	: asset_type_token '.' attribute_name
+	: asset_type_token '.' attribute_name EOF
 	;
 
 attribute_name
@@ -34,7 +34,7 @@ attribute_name
 	;
 
 attribute_name_part
-	: NAME now_only? downcast? attribute_filter
+	: NAME now_only? downcast? attribute_filter?
 	;
 
 downcast
@@ -46,34 +46,35 @@ now_only
 	;
 
 attribute_filter
-	: '[' filter_term ']'
+	: '[' filter_expr ']'
 	;
 
-filter_term 
-	: (filter_term  (logical_op  filter_term)+)  | simple_filter_term | grouped_filter_term 
+filter_expr 
+	: ( simple_filter_term | grouped_filter_term ) (logical_op filter_expr)?
 	;
 
+	
 grouped_filter_term
-	:	'(' filter_term ')'
+	:	'(' filter_expr ')'
 	;
 	
 simple_filter_term
-	: (attribute_name binary_operator (filter_value_list | variable | context_asset) ) | (unary_operator? attribute_name)
+	: ( attribute_name  ( BINARY_OPERATOR ( filter_value_list | VARIABLE | CONTEXT_ASSET ) )? )
+	| UNARY_OPERATOR attribute_name
 	;
-
 
 logical_op
-	: and_op | or_op
+	: AND_OP | OR_OP
 	;
 
-or_op	: '|'
+OR_OP	: '|'
 	;
 
-and_op	: '&' | ';'
+AND_OP	: '&' | ';'
 	;
 
 
-unary_operator
+UNARY_OPERATOR
 	: '+' | '-'
 	;
 
@@ -82,27 +83,27 @@ filter_value_list
 	;
 
 filter_value
-	: single_quoted_string | double_quoted_string
+	: SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
 	;
 
-single_quoted_string
+SINGLE_QUOTED_STRING
 	: '\'' ~('\'')* '\''
 	;
 	
-double_quoted_string
+DOUBLE_QUOTED_STRING
 	: '"' ~('"')* '"'
 	; 
 
-context_asset
+CONTEXT_ASSET
 	: '$'
 	;
 
-variable
+VARIABLE
 	: '$' NAME
 	;
 
-binary_operator
-	: '=' | '!=' | '>' | '>=' | '<' | '<='
+BINARY_OPERATOR
+	: '!=' | '>' | '>=' | '<' | '<=' | '='
 	;
 
 aggregation_name
@@ -112,7 +113,7 @@ aggregation_name
 
 
 oid_token
-	: asset_type_token ':' id (':' moment)?
+	: (asset_type_token ':' id (':' moment)?) | 'NULL'
 	;
 
 
@@ -121,9 +122,9 @@ asset_type_token
 	
 id 	:	NUMERIC ;
 
-moment 	:	 NUMERIC ;
+moment 	:	NUMERIC ;
 
 NAME 	:	('A'..'Z' | 'a'..'z' | '0'..'9' | '_')+ ;
 
-NUMERIC	:	('0'..'9')+ ;
+NUMERIC	:	'-'? '0'..'9'+ ;
 
