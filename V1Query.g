@@ -10,19 +10,39 @@ filter_context_token
 	;
 
 paging_token
-	:
+	: page_size ( ',' page_start )? EOF
+	;
+
+page_start
+	: NUMERIC
+	;
+
+page_size
+	: NUMERIC
 	;
 
 sort_token
-	:
+	: ( sort_token_term ( ',' sort_token_term )* )? EOF
+	;
+
+sort_token_term
+	: asc_sort_token_term | desc_sort_token_term
+	;
+
+asc_sort_token_term
+	: ('+')? attribute_name
+	;
+
+desc_sort_token_term
+	: '-' attribute_name
 	;
 
 filter2_token
-	: filter_expr EOF
+	: filter_expr? EOF
 	;
 
 attribute_selection_token
-	: attribute_name ( ',' attribute_name)* EOF
+	: ( attribute_name ( ',' attribute_name)* )? EOF
 	;
 
 attribute_definition_token
@@ -113,7 +133,7 @@ aggregation_name
 
 
 oid_token
-	: (asset_type_token ':' id (':' moment)?) | 'NULL'
+	: ( ( asset_type_token ':' id ( ':' moment )? ) | 'NULL' ) EOF
 	;
 
 
@@ -124,7 +144,6 @@ id 	:	NUMERIC ;
 
 moment 	:	NUMERIC ;
 
-NAME 	:	('A'..'Z' | 'a'..'z' | '0'..'9' | '_')+ ;
+NAME 	:	('A'..'Z' | 'a'..'z' | '_') ('A'..'Z' | 'a'..'z' | '0'..'9' | '_')* ;
 
 NUMERIC	:	'-'? '0'..'9'+ ;
-
