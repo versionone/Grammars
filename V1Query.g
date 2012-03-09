@@ -3,127 +3,106 @@ grammar V1Query;
 
 
 
-
-
-filter_context_token
-	:
-	;
-
-paging_token
-	:
-	;
-
-sort_token
-	:
-	;
-
-filter2_token
-	:
-	;
-
-attribute_selection_token
-	:
-	;
-
 attribute_definition_token
-	: asset_type_token '.' attribute_name
-	;
+	: asset_type_name '.' attribute_name;
 
-attribute_name
-	: attribute_name_part ('.' attribute_name_part)* ('.@' aggregation_name)?
-	;
+attribute_name 
+	: attribute_name_part ('.' attribute_name_part)* ('.@' aggregation_name)? ;
 
 attribute_name_part
-	: NAME now_only? downcast? attribute_filter
-	;
+	: NAME NOW_OP? downcast_type_name? attribute_filter ;
 
-downcast
-	: ':' asset_type_token
-	;
 
-now_only
-	: '#'
-	;
+downcast_type_name : ':' asset_type_name ;
 
-attribute_filter
-	: '[' filter_term ']'
-	;
 
-filter_term 
-	: (filter_term  (logical_op  filter_term)+)  | simple_filter_term | grouped_filter_term 
-	;
+oid_token : (asset_type_name ':' id_number (':' moment_number)?)  | 'NULL';
 
-grouped_filter_term
-	:	'(' filter_term ')'
+
+
+attribute_filter : '[' filter_expr ']' ;
+
+filter_expr
+	:  '(' filter_expr ')'
+	// |  simple_filter_term another_filter_term?
+	|  simple_filter_term (logical_op filter_expr)?
 	;
 	
-simple_filter_term
-	: (attribute_name binary_operator (filter_value_list | variable | context_asset) ) | (unary_operator? attribute_name)
-	;
-
-
-logical_op
-	: and_op | or_op
-	;
-
-or_op	: '|'
-	;
-
-and_op	: '&' | ';'
-	;
-
-
-unary_operator
-	: '+' | '-'
-	;
-
-filter_value_list
-	: filter_value (',' filter_value)*
-	;
-
-filter_value
-	: single_quoted_string | double_quoted_string
-	;
-
-single_quoted_string
-	: '\'' ~('\'')* '\''
-	;
 	
-double_quoted_string
-	: '"' ~('"')* '"'
-	; 
-
-context_asset
-	: '$'
+simple_filter_term 
+	//options {backtrack=true;}
+	: attribute_name attribute_comparison?
+	| EXISTENCE_OP attribute_name
+	| NONEXISTENCE_OP attribute_name
 	;
 
-variable
-	: '$' NAME
-	;
-
-binary_operator
-	: '=' | '!=' | '>' | '>=' | '<' | '<='
-	;
-
-aggregation_name
-	: NAME
+attribute_comparison
+	:	comparison_operator simple_term_part
 	;
 
 
 
-oid_token
-	: asset_type_token ':' id (':' moment)?
-	;
 
 
-asset_type_token
-	:	NAME ;
+
+simple_term_part : string_list | variable_name ;
+
+string_list : string_literal ( ',' string_literal )* ;
+
+string_literal : SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING ;
+
+SINGLE_QUOTED_STRING : '\'' ~('\'')* '\'' ;
 	
-id 	:	NUMERIC ;
+DOUBLE_QUOTED_STRING : '"' ~('"')* '"' ; 
 
-moment 	:	 NUMERIC ;
 
-NAME 	:	('A'..'Z' | 'a'..'z' | '0'..'9' | '_')+ ;
+variable_name : '$' NAME? ;
 
-NUMERIC	:	('0'..'9')+ ;
+aggregation_name : NAME ;
+
+asset_type_name : NAME ;
+
+id_number : NUMERIC ;
+
+moment_number : NUMERIC ;
+
+
+
+comparison_operator : EQ_OP | LTE_OP | GTE_OP | NE_OP ;
+
+logical_op : AND_OP | OR_OP ;
+
+
+
+NAME : ALPHANUMERIC+ ;
+
+ALPHANUMERIC : ALPHA | DIGIT ;
+
+fragment ALPHA : 'A'..'Z' | 'a'..'z'  | '_' ;
+
+NUMERIC : '-'? DIGIT+ ;
+
+fragment DIGIT : '0'..'9';
+
+OR_OP	: '|' ;
+
+AND_OP	: '&' | ';' ;
+
+EXISTENCE_OP  :	'+' ;
+
+NONEXISTENCE_OP : '-' ;
+
+LTE_OP	: '<=' ;
+
+GTE_OP	: '>=';
+
+NE_OP 	: '!=';
+
+EQ_OP	: '=';
+	
+NOW_OP	: '#' ;	
+
+
+
+
 
