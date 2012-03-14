@@ -109,13 +109,13 @@ attribute_name :
  * EXAMPLE:
  * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Scope/0/Workitems.Estimate.@Sum
  */
-aggregation_name		: NAME ;
+aggregation_name	: NAME ;
 
 attribute_name_part
 	: NAME now_only? downcast? attribute_filter?
 	;
 
-now_only				: HASH ;
+now_only		: HASH ;
 
 /*
  * In context of selecting an attribute, a term may need to be downcast to a
@@ -131,7 +131,7 @@ downcast
 	: COLON asset_type_token
 	;
 
-asset_type_token		: NAME ;
+asset_type_token	: NAME ;
 
 /*
  * In context of selecting an attribute, a filter may be applied to reduce 
@@ -147,14 +147,14 @@ attribute_filter
 filter_expression 
 	: ( grouped_filter_term | simple_filter_term ) 
 	  ( 
-			( and_operator | or_operator ) 
-			( grouped_filter_term | simple_filter_term ) 
+		( and_operator | or_operator ) 
+		( grouped_filter_term | simple_filter_term ) 
 	  )*
 	;
 
-and_operator			: AMP | SEMI ;
+and_operator		: AMP | SEMI ;
 
-or_operator				: PIPE ;
+or_operator		: PIPE ;
 
 grouped_filter_term
 	: OPEN_PAREN filter_expression CLOSE_PAREN
@@ -165,11 +165,11 @@ simple_filter_term
 	| unary_operator attribute_name
 	;
 
-variable 				: VARIABLE_NAME | CONTEXT_ASSET ;
+variable 		: VARIABLE_NAME | CONTEXT_ASSET ;
 
-binary_operator			: EQ | NE | LT | LTE | GT | GTE ;
+binary_operator		: EQ | NE | LT | LTE | GT | GTE ;
 
-unary_operator			: PLUS | MINUS ;
+unary_operator		: PLUS | MINUS ;
 
 filter_value_list
 	: filter_value (COMMA filter_value)*
@@ -184,35 +184,35 @@ filter_value
  */
 SINGLE_QUOTED_STRING	: '\'' ~('\'')* '\'' ;
 DOUBLE_QUOTED_STRING	: '"' ~('"')* '"' ; 
-CONTEXT_ASSET			: '$' ;
-VARIABLE_NAME			: '$' NAME ;
+CONTEXT_ASSET		: '$' ;
+VARIABLE_NAME		: '$' NAME ;
 NAME					: (NAME_CHAR)+ ;
 
-OPEN_PAREN				: '(' ;
-CLOSE_PAREN				: ')' ;
-OPEN_BRACKET			: '[' ;
-CLOSE_BRACKET			: ']' ;
+OPEN_PAREN		: '(' ;
+CLOSE_PAREN		: ')' ;
+OPEN_BRACKET		: '[' ;
+CLOSE_BRACKET		: ']' ;
 
-EQ						: '=' ;
-NE						: '!=' ;
-LT						: '<' ;
-LTE						: '<=' ;
-GT						: '>' ;
-GTE						: '>=' ;
-PLUS					: '+' ;
-MINUS					: '-' ;
+EQ			: '=' ;
+NE			: '!=' ;
+LT			: '<' ;
+LTE			: '<=' ;
+GT			: '>' ;
+GTE			: '>=' ;
+PLUS			: '+' ;
+MINUS			: '-' ;
 
-HASH					: '#' ;
-PIPE					: '|' ;
-AMP						: '&' ;
-SEMI					: ';' ;
-COLON					: ':' ;
-COMMA					: ',' ;
-DOT						: '.' ;
-DOT_AT					: '.@' ;
+HASH			: '#' ;
+PIPE			: '|' ;
+AMP			: '&' ;
+SEMI			: ';' ;
+COLON			: ':' ;
+COMMA			: ',' ;
+DOT			: '.' ;
+DOT_AT			: '.@' ;
 
 fragment ASCII_VISIBLE	: ALPHA | DIGIT | SYMBOL ;
-fragment NAME_CHAR		: ALPHA | DIGIT | '_' ;
-fragment ALPHA			: 'A'..'Z' | 'a'..'z' ;
-fragment DIGIT			: '0'..'9' ;
-fragment SYMBOL			: '!'..'/' | ':'..'@' | '['..'`' | '{'..'~' ;
+fragment NAME_CHAR	: ALPHA | DIGIT | '_' ;
+fragment ALPHA		: 'A'..'Z' | 'a'..'z' ;
+fragment DIGIT		: '0'..'9' ;
+fragment SYMBOL		: '!'..'/' | ':'..'@' | '['..'`' | '{'..'~' ;

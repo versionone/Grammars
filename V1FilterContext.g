@@ -26,14 +26,14 @@ filter_context_values
 	: CONTEXT_VALUE (COMMA CONTEXT_VALUE)*
 	;
 
-CONTEXT_VALUE			: {valueMode}?=> ~(',' | '|')* { valueMode = false; } ;
-VARIABLE_NAME			: '$' NAME ;
-NAME					: (NAME_CHAR)+ ;
+CONTEXT_VALUE		: {valueMode}?=> ~(',' | '|')* { valueMode = false; } ;
+VARIABLE_NAME		: '$' NAME ;
+NAME			: (NAME_CHAR)+ ;
 
-EQ						: '=' { valueMode = true; } ;
-COMMA					: ',' { valueMode = true; } ;
-PIPE					: '|' ;
+EQ			: '=' { valueMode = true; } ;
+COMMA			: ',' { valueMode = true; } ;
+PIPE			: '|' ;
 
-fragment NAME_CHAR		: ALPHA | DIGIT | '_' ;
-fragment ALPHA			: 'A'..'Z' | 'a'..'z' ;
-fragment DIGIT			: '0'..'9' ;
+fragment NAME_CHAR	: ALPHA | DIGIT | '_' ;
+fragment ALPHA		: 'A'..'Z' | 'a'..'z' ;
+fragment DIGIT		: '0'..'9' ;
