@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="content-type" content="text/html; charset=latin1">
+  <style type="text/css">
+td.linenos { background-color: #f0f0f0; padding-right: 10px; }
+span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
+pre { line-height: 125%; }
+body .hll { background-color: #ffffcc }
+body  { background: #f8f8f8; }
+body .c { color: #408080; font-style: italic } /* Comment */
+body .err { border: 1px solid #FF0000 } /* Error */
+body .k { color: #008000; font-weight: bold } /* Keyword */
+body .o { color: #666666 } /* Operator */
+body .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+body .cp { color: #BC7A00 } /* Comment.Preproc */
+body .c1 { color: #408080; font-style: italic } /* Comment.Single */
+body .cs { color: #408080; font-style: italic } /* Comment.Special */
+body .gd { color: #A00000 } /* Generic.Deleted */
+body .ge { font-style: italic } /* Generic.Emph */
+body .gr { color: #FF0000 } /* Generic.Error */
+body .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+body .gi { color: #00A000 } /* Generic.Inserted */
+body .go { color: #808080 } /* Generic.Output */
+body .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+body .gs { font-weight: bold } /* Generic.Strong */
+body .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+body .gt { color: #0040D0 } /* Generic.Traceback */
+body .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+body .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+body .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+body .kp { color: #008000 } /* Keyword.Pseudo */
+body .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+body .kt { color: #B00040 } /* Keyword.Type */
+body .m { color: #666666 } /* Literal.Number */
+body .s { color: #BA2121 } /* Literal.String */
+body .na { color: #7D9029 } /* Name.Attribute */
+body .nb { color: #008000 } /* Name.Builtin */
+body .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+body .no { color: #880000 } /* Name.Constant */
+body .nd { color: #AA22FF } /* Name.Decorator */
+body .ni { color: #999999; font-weight: bold } /* Name.Entity */
+body .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+body .nf { color: #0000FF } /* Name.Function */
+body .nl { color: #A0A000 } /* Name.Label */
+body .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+body .nt { color: #008000; font-weight: bold } /* Name.Tag */
+body .nv { color: #19177C } /* Name.Variable */
+body .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+body .w { color: #bbbbbb } /* Text.Whitespace */
+body .mf { color: #666666 } /* Literal.Number.Float */
+body .mh { color: #666666 } /* Literal.Number.Hex */
+body .mi { color: #666666 } /* Literal.Number.Integer */
+body .mo { color: #666666 } /* Literal.Number.Oct */
+body .sb { color: #BA2121 } /* Literal.String.Backtick */
+body .sc { color: #BA2121 } /* Literal.String.Char */
+body .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+body .s2 { color: #BA2121 } /* Literal.String.Double */
+body .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+body .sh { color: #BA2121 } /* Literal.String.Heredoc */
+body .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+body .sx { color: #008000 } /* Literal.String.Other */
+body .sr { color: #BB6688 } /* Literal.String.Regex */
+body .s1 { color: #BA2121 } /* Literal.String.Single */
+body .ss { color: #19177C } /* Literal.String.Symbol */
+body .bp { color: #008000 } /* Name.Builtin.Pseudo */
+body .vc { color: #19177C } /* Name.Variable.Class */
+body .vg { color: #19177C } /* Name.Variable.Global */
+body .vi { color: #19177C } /* Name.Variable.Instance */
+body .il { color: #666666 } /* Literal.Number.Integer.Long */
+
+  </style>
+</head>
+<body>
+<h2></h2>
+
+<div class="highlight"><pre><span class="k">grammar</span><span class="w"> </span><span class="nc">V1Query</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">/*</span>
+<span class="c"> * Selection is used to determine which attributes are returned in a query. </span>
+<span class="c"> * Attribute references are comma separated.</span>
+<span class="c"> * EXAMPLE:</span>
+<span class="c"> * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Story?sel=Name,Number</span>
+<span class="c"> */</span><span class="w"></span>
+<span class="nl">attribute_selection_token</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="nv">attribute_name</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="s">&#39;,&#39;</span><span class="w"> </span><span class="nv">attribute_name</span><span class="o">)*</span><span class="w"> </span><span class="o">)?</span><span class="w"> </span><span class="no">EOF</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">/*</span>
+<span class="c"> * Filter is used to narrow the results of a query. Only valid when asking for </span>
+<span class="c"> * a list of assets.</span>
+<span class="c"> * EXAMPLE:</span>
+<span class="c"> * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Story?where=ToDo=&#39;0&#39; </span>
+<span class="c"> */</span><span class="w"></span>
+<span class="nl">filter2_token</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="nv">filter_expression</span><span class="o">?</span><span class="w"> </span><span class="no">EOF</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">/*</span>
+<span class="c"> * Sort is used to order the results of an asset query. For example you may </span>
+<span class="c"> * wish to sort a list of Story assets by their Estimate and then Name. </span>
+<span class="c"> * Attribute references are comma separated, as in the following example.</span>
+<span class="c"> * EXAMPLE:</span>
+<span class="c"> * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Story?sort=Estimate,Name</span>
+<span class="c"> */</span><span class="w"></span>
+<span class="nl">sort_token</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="nv">sort_token_term</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="no">COMMA</span><span class="w"> </span><span class="nv">sort_token_term</span><span class="w"> </span><span class="o">)*</span><span class="w"> </span><span class="o">)?</span><span class="w"> </span><span class="no">EOF</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">/*</span>
+<span class="c"> * Each sort term has an optional sort order. Use + for ascending and - for </span>
+<span class="c"> * descending. If no order operator is supplied, ascending (+) is assumed. In </span>
+<span class="c"> * the following example, Estimates are sorting in descending order and Names </span>
+<span class="c"> * are sorted in ascending order.</span>
+<span class="c"> * EXAMPLE:</span>
+<span class="c"> * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Story?sort=-Estimate,+Name</span>
+<span class="c"> */</span><span class="w"></span>
+<span class="nl">sort_token_term</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="nv">asc_sort_token_term</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">desc_sort_token_term</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">asc_sort_token_term</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">PLUS</span><span class="o">?</span><span class="w"> </span><span class="nv">attribute_name</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">desc_sort_token_term</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">MINUS</span><span class="w"> </span><span class="nv">attribute_name</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">attribute_definition_token</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="nv">asset_type_token</span><span class="w"> </span><span class="no">DOT</span><span class="w"> </span><span class="nv">attribute_name</span><span class="w"> </span><span class="no">EOF</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">/*</span>
+<span class="c"> * Attributes describe the properties that make up each asset type. An </span>
+<span class="c"> * attribute defines the type of its value, whether it is required and/or </span>
+<span class="c"> * read-only, and many other qualities. Attribute definitions are identified by </span>
+<span class="c"> * a name that is unique within its asset type. The dot operator &quot;.&quot; is used to </span>
+<span class="c"> * reference an attribute. For example, the following returns the parent Name </span>
+<span class="c"> * of a Category on a Story.</span>
+<span class="c"> * EXAMPLE:</span>
+<span class="c"> * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Story/1055/Category.Name</span>
+<span class="c"> * </span>
+<span class="c"> * Attributes are defined as either scalars or relations to other assets. </span>
+<span class="c"> * Further, relation attributes can be either single-value or multi-value. For </span>
+<span class="c"> * example, the Estimate attribute on the Workitem asset type is a scalar </span>
+<span class="c"> * (specifically, a floating-point number). The Workitem.Scope attribute is a </span>
+<span class="c"> * single-value relation to a Scope asset. The complementary relationship, </span>
+<span class="c"> * Scope.Workitems is a multi-value relation to Workitem assets.</span>
+<span class="c"> * </span>
+<span class="c"> * When an attribute is a relation to another asset, then dot notation can be </span>
+<span class="c"> * used to select the attribute on that referenced asset. For example, the </span>
+<span class="c"> * following returns the Name values for the Workitems in the root project.</span>
+<span class="c"> * EXAMPLE:</span>
+<span class="c"> * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Scope/0/Workitems.Name</span>
+<span class="c"> *</span>
+<span class="c"> * The aggregation can be used to roll-up a set of values to a single value. </span>
+<span class="c"> * For example, the following returns the total number of Workitem assets that </span>
+<span class="c"> * belong to Scope with ID 0.</span>
+<span class="c"> * EXAMPLE:</span>
+<span class="c"> * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Scope/0/Workitems.@Count</span>
+<span class="c"> */</span><span class="w"></span>
+<span class="nl">attribute_name</span><span class="w"> </span><span class="p">:</span><span class="w"></span>
+<span class="w">	</span><span class="nv">attribute_name_part</span><span class="w"> 		</span><span class="c">// name part</span><span class="w"></span>
+<span class="w">	</span><span class="o">(</span><span class="no">DOT</span><span class="w"> </span><span class="nv">attribute_name_part</span><span class="o">)*</span><span class="w"> 	</span><span class="c">// any number of dot separated name parts</span><span class="w"></span>
+<span class="w">	</span><span class="o">(</span><span class="no">DOT_AT</span><span class="w"> </span><span class="nv">aggregation_name</span><span class="o">)?</span><span class="w">	</span><span class="c">// optional aggretation</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">/*</span>
+<span class="c"> * An aggregation is a simple mathematical function that returns a single value </span>
+<span class="c"> * from the selected attribute values. The following aggretation types are </span>
+<span class="c"> * defined:</span>
+<span class="c"> * Sum :			Sum the returned values</span>
+<span class="c"> * Count :			Count the returned assets</span>
+<span class="c"> * DistinctCount :	Count the returned assets, ensuring each asset is </span>
+<span class="c"> * 						counted only once</span>
+<span class="c"> * Min : 			Find the least value from the returned values</span>
+<span class="c"> * Max :			Find the greatest value from the returned values</span>
+<span class="c"> * MinDate :		Find the oldest date from the returned values</span>
+<span class="c"> * MaxDate :		Find the newest date from the returned values</span>
+<span class="c"> * And :			Returns true if all the returned values are true</span>
+<span class="c"> * Or :				Returns true if any of the values are true</span>
+<span class="c"> * MaxState :		</span>
+<span class="c"> *</span>
+<span class="c"> * EXAMPLE:</span>
+<span class="c"> * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Scope/0/Workitems.Estimate.@Sum</span>
+<span class="c"> */</span><span class="w"></span>
+<span class="nl">aggregation_name</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="no">NAME</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">attribute_name_part</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">NAME</span><span class="w"> </span><span class="nv">now_only</span><span class="o">?</span><span class="w"> </span><span class="nv">downcast</span><span class="o">?</span><span class="w"> </span><span class="nv">attribute_filter</span><span class="o">?</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">now_only</span><span class="w">				</span><span class="p">:</span><span class="w"> </span><span class="no">HASH</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="c">/*</span>
+<span class="c"> * In context of selecting an attribute, a term may need to be downcast to a</span>
+<span class="c"> * more specific type so a child attribute is available. For example of </span>
+<span class="c"> * downcast, at the abstract level of Workitems, there is no Category </span>
+<span class="c"> * attribute. At the concrete level of Story, there is a Category attribute. </span>
+<span class="c"> * Therefore, in order to query for Categories on Workitems, the AssetType </span>
+<span class="c"> * must be downcast to Story. Without the downcast, the query will fail.</span>
+<span class="c"> * EXAMPLE:</span>
+<span class="c"> * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Scope/0/Workitems:Story.Category</span>
+<span class="c"> */</span><span class="w"></span>
+<span class="nl">downcast</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">COLON</span><span class="w"> </span><span class="nv">asset_type_token</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">asset_type_token</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="no">NAME</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="c">/*</span>
+<span class="c"> * In context of selecting an attribute, a filter may be applied to reduce </span>
+<span class="c"> * the set of returned assets. For example of a filter, the following returns </span>
+<span class="c"> * Workitems in the root project that have a ToDo value equal to zero.</span>
+<span class="c"> * EXAMPLE:</span>
+<span class="c"> * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Scope/0/Workitems[ToDo=&#39;0&#39;]</span>
+<span class="c"> */</span><span class="w"></span>
+<span class="nl">attribute_filter</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">OPEN_BRACKET</span><span class="w"> </span><span class="nv">filter_expression</span><span class="w"> </span><span class="no">CLOSE_BRACKET</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">filter_expression</span><span class="w"> </span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="nv">grouped_filter_term</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">simple_filter_term</span><span class="w"> </span><span class="o">)</span><span class="w"> </span>
+<span class="w">	  </span><span class="o">(</span><span class="w"> </span>
+<span class="w">			</span><span class="o">(</span><span class="w"> </span><span class="nv">and_operator</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">or_operator</span><span class="w"> </span><span class="o">)</span><span class="w"> </span>
+<span class="w">			</span><span class="o">(</span><span class="w"> </span><span class="nv">grouped_filter_term</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">simple_filter_term</span><span class="w"> </span><span class="o">)</span><span class="w"> </span>
+<span class="w">	  </span><span class="o">)*</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">and_operator</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="no">AMP</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">SEMI</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">or_operator</span><span class="w">				</span><span class="p">:</span><span class="w"> </span><span class="no">PIPE</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">grouped_filter_term</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">OPEN_PAREN</span><span class="w"> </span><span class="nv">filter_expression</span><span class="w"> </span><span class="no">CLOSE_PAREN</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">simple_filter_term</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="nv">attribute_name</span><span class="w">  </span><span class="o">(</span><span class="w"> </span><span class="nv">binary_operator</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="nv">filter_value_list</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">variable</span><span class="w"> </span><span class="o">)</span><span class="w"> </span><span class="o">)?</span><span class="w"> </span><span class="o">)</span><span class="w"></span>
+<span class="w">	</span><span class="o">|</span><span class="w"> </span><span class="nv">unary_operator</span><span class="w"> </span><span class="nv">attribute_name</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">variable</span><span class="w"> 				</span><span class="p">:</span><span class="w"> </span><span class="no">VARIABLE_NAME</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">CONTEXT_ASSET</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">binary_operator</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="no">EQ</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">NE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">LT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">LTE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">GT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">GTE</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">unary_operator</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="no">PLUS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">MINUS</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">filter_value_list</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="nv">filter_value</span><span class="w"> </span><span class="o">(</span><span class="no">COMMA</span><span class="w"> </span><span class="nv">filter_value</span><span class="o">)*</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">filter_value</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">SINGLE_QUOTED_STRING</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">DOUBLE_QUOTED_STRING</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">/*</span>
+<span class="c"> * Lexing Rules</span>
+<span class="c"> */</span><span class="w"></span>
+<span class="nl">SINGLE_QUOTED_STRING</span><span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;\&#39;&#39;</span><span class="w"> </span><span class="o">~(</span><span class="s">&#39;\&#39;&#39;</span><span class="o">)*</span><span class="w"> </span><span class="s">&#39;\&#39;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">DOUBLE_QUOTED_STRING</span><span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&quot;&#39;</span><span class="w"> </span><span class="o">~(</span><span class="s">&#39;&quot;&#39;</span><span class="o">)*</span><span class="w"> </span><span class="s">&#39;&quot;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="nl">CONTEXT_ASSET</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">VARIABLE_NAME</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$&#39;</span><span class="w"> </span><span class="no">NAME</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">NAME</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="o">(</span><span class="no">NAME_CHAR</span><span class="o">)+</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">OPEN_PAREN</span><span class="w">				</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;(&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">CLOSE_PAREN</span><span class="w">				</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;)&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">OPEN_BRACKET</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;[&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">CLOSE_BRACKET</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;]&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">EQ</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;=&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">NE</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;!=&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">LT</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&lt;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">LTE</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&lt;=&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">GT</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&gt;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">GTE</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&gt;=&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">PLUS</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">MINUS</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">HASH</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">PIPE</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;|&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">AMP</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&amp;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">SEMI</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">COLON</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;:&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">COMMA</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;,&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">DOT</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;.&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">DOT_AT</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;.@&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="k">fragment</span><span class="w"> </span><span class="nl">ASCII_VISIBLE</span><span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">ALPHA</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">DIGIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">SYMBOL</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="k">fragment</span><span class="w"> </span><span class="nl">NAME_CHAR</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="no">ALPHA</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">DIGIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;_&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="k">fragment</span><span class="w"> </span><span class="nl">ALPHA</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;A&#39;</span><span class="o">..</span><span class="s">&#39;Z&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;a&#39;</span><span class="o">..</span><span class="s">&#39;z&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="k">fragment</span><span class="w"> </span><span class="nl">DIGIT</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0&#39;</span><span class="o">..</span><span class="s">&#39;9&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="k">fragment</span><span class="w"> </span><span class="nl">SYMBOL</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;!&#39;</span><span class="o">..</span><span class="s">&#39;/&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;:&#39;</span><span class="o">..</span><span class="s">&#39;@&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;[&#39;</span><span class="o">..</span><span class="s">&#39;`&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;{&#39;</span><span class="o">..</span><span class="s">&#39;~&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</body>
+</html>
