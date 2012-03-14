@@ -186,7 +186,7 @@ SINGLE_QUOTED_STRING	: '\'' ~('\'')* '\'' ;
 DOUBLE_QUOTED_STRING	: '"' ~('"')* '"' ; 
 CONTEXT_ASSET		: '$' ;
 VARIABLE_NAME		: '$' NAME ;
-NAME					: (NAME_CHAR)+ ;
+NAME			: (NAME_CHAR)+ ;
 
 OPEN_PAREN		: '(' ;
 CLOSE_PAREN		: ')' ;

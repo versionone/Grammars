@@ -18,6 +18,10 @@ parameter), filters (where parameter), and sort (sort parameter).
 * V1Paging.g - Describes the tokens for paging (page parameter).
 * V1FilterContext.g - Describes the tokens for filter context (with parameter).
 
+## Generating HTML ##
+```bash
+pygmentize -f html -O full -o V1Query.html V1Query.g
+```
 ## License ##
 Redistribution and use in source and binary forms, with or without 
 modification, are permitted provided that the following conditions are met:
