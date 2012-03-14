@@ -188,13 +188,13 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="c"> * EXAMPLE:</span>
 <span class="c"> * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Scope/0/Workitems.Estimate.@Sum</span>
 <span class="c"> */</span><span class="w"></span>
-<span class="nl">aggregation_name</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="no">NAME</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">aggregation_name</span><span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">NAME</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
 <span class="nl">attribute_name_part</span><span class="w"></span>
 <span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">NAME</span><span class="w"> </span><span class="nv">now_only</span><span class="o">?</span><span class="w"> </span><span class="nv">downcast</span><span class="o">?</span><span class="w"> </span><span class="nv">attribute_filter</span><span class="o">?</span><span class="w"></span>
 <span class="w">	</span><span class="p">;</span><span class="w"></span>
 
-<span class="nl">now_only</span><span class="w">				</span><span class="p">:</span><span class="w"> </span><span class="no">HASH</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">now_only</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="no">HASH</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
 <span class="c">/*</span>
 <span class="c"> * In context of selecting an attribute, a term may need to be downcast to a</span>
@@ -210,7 +210,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">COLON</span><span class="w"> </span><span class="nv">asset_type_token</span><span class="w"></span>
 <span class="w">	</span><span class="p">;</span><span class="w"></span>
 
-<span class="nl">asset_type_token</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="no">NAME</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">asset_type_token</span><span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">NAME</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
 <span class="c">/*</span>
 <span class="c"> * In context of selecting an attribute, a filter may be applied to reduce </span>
@@ -226,14 +226,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="nl">filter_expression</span><span class="w"> </span>
 <span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="nv">grouped_filter_term</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">simple_filter_term</span><span class="w"> </span><span class="o">)</span><span class="w"> </span>
 <span class="w">	  </span><span class="o">(</span><span class="w"> </span>
-<span class="w">			</span><span class="o">(</span><span class="w"> </span><span class="nv">and_operator</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">or_operator</span><span class="w"> </span><span class="o">)</span><span class="w"> </span>
-<span class="w">			</span><span class="o">(</span><span class="w"> </span><span class="nv">grouped_filter_term</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">simple_filter_term</span><span class="w"> </span><span class="o">)</span><span class="w"> </span>
+<span class="w">		</span><span class="o">(</span><span class="w"> </span><span class="nv">and_operator</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">or_operator</span><span class="w"> </span><span class="o">)</span><span class="w"> </span>
+<span class="w">		</span><span class="o">(</span><span class="w"> </span><span class="nv">grouped_filter_term</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">simple_filter_term</span><span class="w"> </span><span class="o">)</span><span class="w"> </span>
 <span class="w">	  </span><span class="o">)*</span><span class="w"></span>
 <span class="w">	</span><span class="p">;</span><span class="w"></span>
 
-<span class="nl">and_operator</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="no">AMP</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">SEMI</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">and_operator</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="no">AMP</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">SEMI</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
-<span class="nl">or_operator</span><span class="w">				</span><span class="p">:</span><span class="w"> </span><span class="no">PIPE</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">or_operator</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="no">PIPE</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
 <span class="nl">grouped_filter_term</span><span class="w"></span>
 <span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">OPEN_PAREN</span><span class="w"> </span><span class="nv">filter_expression</span><span class="w"> </span><span class="no">CLOSE_PAREN</span><span class="w"></span>
@@ -244,11 +244,11 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="w">	</span><span class="o">|</span><span class="w"> </span><span class="nv">unary_operator</span><span class="w"> </span><span class="nv">attribute_name</span><span class="w"></span>
 <span class="w">	</span><span class="p">;</span><span class="w"></span>
 
-<span class="nl">variable</span><span class="w"> 				</span><span class="p">:</span><span class="w"> </span><span class="no">VARIABLE_NAME</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">CONTEXT_ASSET</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">variable</span><span class="w"> 		</span><span class="p">:</span><span class="w"> </span><span class="no">VARIABLE_NAME</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">CONTEXT_ASSET</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
-<span class="nl">binary_operator</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="no">EQ</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">NE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">LT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">LTE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">GT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">GTE</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">binary_operator</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="no">EQ</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">NE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">LT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">LTE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">GT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">GTE</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
-<span class="nl">unary_operator</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="no">PLUS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">MINUS</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">unary_operator</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="no">PLUS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">MINUS</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
 <span class="nl">filter_value_list</span><span class="w"></span>
 <span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="nv">filter_value</span><span class="w"> </span><span class="o">(</span><span class="no">COMMA</span><span class="w"> </span><span class="nv">filter_value</span><span class="o">)*</span><span class="w"></span>
@@ -263,38 +263,38 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="c"> */</span><span class="w"></span>
 <span class="nl">SINGLE_QUOTED_STRING</span><span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;\&#39;&#39;</span><span class="w"> </span><span class="o">~(</span><span class="s">&#39;\&#39;&#39;</span><span class="o">)*</span><span class="w"> </span><span class="s">&#39;\&#39;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 <span class="nl">DOUBLE_QUOTED_STRING</span><span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&quot;&#39;</span><span class="w"> </span><span class="o">~(</span><span class="s">&#39;&quot;&#39;</span><span class="o">)*</span><span class="w"> </span><span class="s">&#39;&quot;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
-<span class="nl">CONTEXT_ASSET</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">VARIABLE_NAME</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$&#39;</span><span class="w"> </span><span class="no">NAME</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">CONTEXT_ASSET</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">VARIABLE_NAME</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$&#39;</span><span class="w"> </span><span class="no">NAME</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 <span class="nl">NAME</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="o">(</span><span class="no">NAME_CHAR</span><span class="o">)+</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
-<span class="nl">OPEN_PAREN</span><span class="w">				</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;(&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">CLOSE_PAREN</span><span class="w">				</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;)&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">OPEN_BRACKET</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;[&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">CLOSE_BRACKET</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;]&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">OPEN_PAREN</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;(&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">CLOSE_PAREN</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;)&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">OPEN_BRACKET</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;[&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">CLOSE_BRACKET</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;]&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
-<span class="nl">EQ</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;=&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">NE</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;!=&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">LT</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&lt;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">LTE</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&lt;=&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">GT</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&gt;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">GTE</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&gt;=&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">PLUS</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">MINUS</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">EQ</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;=&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">NE</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;!=&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">LT</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&lt;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">LTE</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&lt;=&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">GT</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&gt;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">GTE</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&gt;=&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">PLUS</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">MINUS</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
-<span class="nl">HASH</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">PIPE</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;|&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">AMP</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&amp;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">SEMI</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">COLON</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;:&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">COMMA</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;,&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">DOT</span><span class="w">						</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;.&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="nl">DOT_AT</span><span class="w">					</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;.@&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">HASH</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">PIPE</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;|&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">AMP</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&amp;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">SEMI</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;;&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">COLON</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;:&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">COMMA</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;,&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">DOT</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;.&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">DOT_AT</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;.@&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
 <span class="k">fragment</span><span class="w"> </span><span class="nl">ASCII_VISIBLE</span><span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">ALPHA</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">DIGIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">SYMBOL</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="k">fragment</span><span class="w"> </span><span class="nl">NAME_CHAR</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="no">ALPHA</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">DIGIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;_&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="k">fragment</span><span class="w"> </span><span class="nl">ALPHA</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;A&#39;</span><span class="o">..</span><span class="s">&#39;Z&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;a&#39;</span><span class="o">..</span><span class="s">&#39;z&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="k">fragment</span><span class="w"> </span><span class="nl">DIGIT</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0&#39;</span><span class="o">..</span><span class="s">&#39;9&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="k">fragment</span><span class="w"> </span><span class="nl">SYMBOL</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;!&#39;</span><span class="o">..</span><span class="s">&#39;/&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;:&#39;</span><span class="o">..</span><span class="s">&#39;@&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;[&#39;</span><span class="o">..</span><span class="s">&#39;`&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;{&#39;</span><span class="o">..</span><span class="s">&#39;~&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="k">fragment</span><span class="w"> </span><span class="nl">NAME_CHAR</span><span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">ALPHA</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">DIGIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;_&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="k">fragment</span><span class="w"> </span><span class="nl">ALPHA</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;A&#39;</span><span class="o">..</span><span class="s">&#39;Z&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;a&#39;</span><span class="o">..</span><span class="s">&#39;z&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="k">fragment</span><span class="w"> </span><span class="nl">DIGIT</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0&#39;</span><span class="o">..</span><span class="s">&#39;9&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="k">fragment</span><span class="w"> </span><span class="nl">SYMBOL</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;!&#39;</span><span class="o">..</span><span class="s">&#39;/&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;:&#39;</span><span class="o">..</span><span class="s">&#39;@&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;[&#39;</span><span class="o">..</span><span class="s">&#39;`&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;{&#39;</span><span class="o">..</span><span class="s">&#39;~&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </body>
 </html>
