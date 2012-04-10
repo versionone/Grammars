@@ -1,3 +1,11 @@
+/*
+ * # V1Paging #
+ * This file is part of the VersionOne Grammars project. This is an open source 
+ * product and is licensed under a modified BSD license. Source code and other 
+ * information is available from:
+ * https://github.com/versionone/Grammars
+ */
+
 grammar V1Paging;
 
 /*

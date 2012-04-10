@@ -10,13 +10,30 @@ more sophisticated facets of the API.
 
 This product includes software developed at VersionOne 
 (http://versionone.com/). This product is open source and is licensed under a 
-modified BSD license.
+modified BSD license. Source code is available from:
+https://github.com/versionone/Grammars
 
 ## The Grammars ##
 * V1Query.g - Describes the tokens for attribute names, selection (sel 
 parameter), filters (where parameter), and sort (sort parameter).
 * V1Paging.g - Describes the tokens for paging (page parameter).
 * V1FilterContext.g - Describes the tokens for filter context (with parameter).
+
+These grammars are written in ANTLR format so they can be executed. Although executable, they are provided for documentation and are not guaranteed to match the VersionOne core application implementation.
+
+In the context of a VersionOne Core API request, the tokens will be combined in normal URL query syntax and should be URL encoded. As such, there is no single grammar for the whole URL syntax.
+
+## Examples and Samples ##
+All examples (preceded by EXAMPLE:) in the comments are live and can be sent 
+to a browser to execute. Although all of the examples should execute and 
+return some XML result, some queries may return 0 assets. Use the following 
+credentials to connect:
+Username: admin
+Password: admin
+
+In contrast, samples (preceded by SAMPLE:) comply with the syntax but are not 
+associated with actual data in the live system. Executing them will result in 
+an HTTP error.
 
 ## Generating HTML ##
 ```bash
