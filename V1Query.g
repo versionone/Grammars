@@ -142,13 +142,16 @@ attribute_name_part
 	: NAME now_only? downcast? attribute_filter?
 	;
 /*
- * In context of a history request, an attribute can change values over time. 
- * Adding hash to the attribute specifies the attribute should reflect the 
- * current value. The following example is a way to get all the stories from a 
- * project that is currently named "Website". Notice the encoding of # (as %23) 
- * is not optional since it is also used in URLs to specify a fragment part.
+ * In context of a history request, a referenced asset can change values over 
+ * time. Adding hash after the asset name specifies the attribute values should 
+ * reflect the current asset state. The following example is a way to get all 
+ * the stories from a project that is currently named "Website". Notice the 
+ * encoding of # (as %23) is not optional since it is also used in URLs to 
+ * specify a fragment part. Since the token will be parsed after the URL rules 
+ * are applied, anything after the # will be ignored. Therefore, using # 
+ * instead of the encoded value may return a confusing result.
  * EXAMPLE:
-https://www14.v1host.com/v1sdktesting/rest-1.v1/Hist/Story?where=Parent.Name%23='Website'
+https://www14.v1host.com/v1sdktesting/rest-1.v1/Hist/Story?where=Parent%23.Name='Website'
   */
 now_only		: HASH ;
 
@@ -205,7 +208,7 @@ or_operator		: PIPE ;
  * comparison operator. Alternatively, the attribute may be preceded by a unary 
  * operator to make an assertion about existence.
  * EXAMPLE:
- * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Scope/0/Workitems[-Owners;ToDo>'0']
+ * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Scope/0?sel=Workitems[-Owners;ToDo>'0']
  */
 simple_filter_term
 	: ( 
