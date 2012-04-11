@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="content-type" content="text/html; charset=latin1">
+  <style type="text/css">
+td.linenos { background-color: #f0f0f0; padding-right: 10px; }
+span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
+pre { line-height: 125%; }
+body .hll { background-color: #ffffcc }
+body  { background: #f8f8f8; }
+body .c { color: #408080; font-style: italic } /* Comment */
+body .err { border: 1px solid #FF0000 } /* Error */
+body .k { color: #008000; font-weight: bold } /* Keyword */
+body .o { color: #666666 } /* Operator */
+body .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+body .cp { color: #BC7A00 } /* Comment.Preproc */
+body .c1 { color: #408080; font-style: italic } /* Comment.Single */
+body .cs { color: #408080; font-style: italic } /* Comment.Special */
+body .gd { color: #A00000 } /* Generic.Deleted */
+body .ge { font-style: italic } /* Generic.Emph */
+body .gr { color: #FF0000 } /* Generic.Error */
+body .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+body .gi { color: #00A000 } /* Generic.Inserted */
+body .go { color: #808080 } /* Generic.Output */
+body .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+body .gs { font-weight: bold } /* Generic.Strong */
+body .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+body .gt { color: #0040D0 } /* Generic.Traceback */
+body .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+body .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+body .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+body .kp { color: #008000 } /* Keyword.Pseudo */
+body .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+body .kt { color: #B00040 } /* Keyword.Type */
+body .m { color: #666666 } /* Literal.Number */
+body .s { color: #BA2121 } /* Literal.String */
+body .na { color: #7D9029 } /* Name.Attribute */
+body .nb { color: #008000 } /* Name.Builtin */
+body .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+body .no { color: #880000 } /* Name.Constant */
+body .nd { color: #AA22FF } /* Name.Decorator */
+body .ni { color: #999999; font-weight: bold } /* Name.Entity */
+body .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+body .nf { color: #0000FF } /* Name.Function */
+body .nl { color: #A0A000 } /* Name.Label */
+body .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+body .nt { color: #008000; font-weight: bold } /* Name.Tag */
+body .nv { color: #19177C } /* Name.Variable */
+body .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+body .w { color: #bbbbbb } /* Text.Whitespace */
+body .mf { color: #666666 } /* Literal.Number.Float */
+body .mh { color: #666666 } /* Literal.Number.Hex */
+body .mi { color: #666666 } /* Literal.Number.Integer */
+body .mo { color: #666666 } /* Literal.Number.Oct */
+body .sb { color: #BA2121 } /* Literal.String.Backtick */
+body .sc { color: #BA2121 } /* Literal.String.Char */
+body .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+body .s2 { color: #BA2121 } /* Literal.String.Double */
+body .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+body .sh { color: #BA2121 } /* Literal.String.Heredoc */
+body .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+body .sx { color: #008000 } /* Literal.String.Other */
+body .sr { color: #BB6688 } /* Literal.String.Regex */
+body .s1 { color: #BA2121 } /* Literal.String.Single */
+body .ss { color: #19177C } /* Literal.String.Symbol */
+body .bp { color: #008000 } /* Name.Builtin.Pseudo */
+body .vc { color: #19177C } /* Name.Variable.Class */
+body .vg { color: #19177C } /* Name.Variable.Global */
+body .vi { color: #19177C } /* Name.Variable.Instance */
+body .il { color: #666666 } /* Literal.Number.Integer.Long */
+
+  </style>
+</head>
+<body>
+<h2></h2>
+
+<div class="highlight"><pre><span class="c">/*</span>
+<span class="c"> * # V1FilterContext #</span>
+<span class="c"> * This file is part of the VersionOne Grammars project. This is an open source </span>
+<span class="c"> * product and is licensed under a modified BSD license. Source code and other </span>
+<span class="c"> * information is available from:</span>
+<span class="c"> * https://github.com/versionone/Grammars</span>
+<span class="c"> */</span><span class="w"></span>
+
+<span class="k">grammar</span><span class="w"> </span><span class="nc">V1FilterContext</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">/*</span>
+<span class="c"> * The actual implementation of this grammar is done with simple token </span>
+<span class="c"> * splitting. To represent it in this normative syntax, some ANTLR-specific </span>
+<span class="c"> * coding (such as the following) has been added.</span>
+<span class="c"> */</span><span class="w"></span>
+<span class="nl">@lexer</span><span class="p">::</span><span class="nl">members</span><span class="w"> </span><span class="p">{</span>
+    <span class="n">boolean</span> <span class="n">valueMode</span> <span class="o">=</span> <span class="kp">false</span><span class="p">;</span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c">/* </span>
+<span class="c"> * The following is a non-normative representation to help interpret the </span>
+<span class="c"> * normative syntax:</span>
+<span class="c"> * $&lt;variable&gt;=&lt;value&gt;(, ...) ( | ... )</span>
+<span class="c"> * </span>
+<span class="c"> * assignment := variable = value (, value)*</span>
+<span class="c"> * SAMPLE:</span>
+<span class="c"> * $SCOPE=Scope:0,Scope:1,Scope:2</span>
+<span class="c"> *</span>
+<span class="c"> * context-token := assignment (| assignment)*</span>
+<span class="c"> * SAMPLE:</span>
+<span class="c"> * $STORY=Story:3|$SCOPE=Scope:0,Scope:1,Scope:2</span>
+<span class="c"> */</span><span class="w"></span>
+
+<span class="c">/*</span>
+<span class="c"> * A filter context token is used for variable assignment. Variables may be </span>
+<span class="c"> * used in filters and are particularly useful when the same values must be </span>
+<span class="c"> * repeated throughout a filter token.</span>
+<span class="c"> * EXAMPLE:</span>
+<span class="c"> * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Epic?where=AssetState!=&#39;Closed&#39;;Scope=$Scope;-SuperAndUp[Scope=$Scope]&amp;with=$Scope=Scope:0,Scope:1,Scope:2</span>
+<span class="c"> */</span><span class="w"></span>
+<span class="nl">filter_context_token</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="nv">filter_context_term</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="no">PIPE</span><span class="w"> </span><span class="nv">filter_context_term</span><span class="w"> </span><span class="o">)*</span><span class="w"> </span><span class="o">)?</span><span class="w"> </span><span class="no">EOF</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">filter_context_term</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">VARIABLE_NAME</span><span class="w"> </span><span class="no">EQ</span><span class="w"> </span><span class="nv">filter_context_values</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">filter_context_values</span><span class="w"></span>
+<span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">CONTEXT_VALUE</span><span class="w"> </span><span class="o">(</span><span class="no">COMMA</span><span class="w"> </span><span class="no">CONTEXT_VALUE</span><span class="o">)*</span><span class="w"></span>
+<span class="w">	</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">CONTEXT_VALUE</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="n">valueMode</span><span class="p">}</span><span class="o">?=&gt;</span><span class="w"> </span><span class="o">~(</span><span class="s">&#39;,&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;|&#39;</span><span class="o">)*</span><span class="w"> </span><span class="p">{</span> <span class="n">valueMode</span> <span class="o">=</span> <span class="kp">false</span><span class="p">;</span> <span class="p">}</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">VARIABLE_NAME</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;$&#39;</span><span class="w"> </span><span class="no">NAME</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">NAME</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="o">(</span><span class="no">NAME_CHAR</span><span class="o">)+</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">EQ</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;=&#39;</span><span class="w"> </span><span class="p">{</span> <span class="n">valueMode</span> <span class="o">=</span> <span class="kp">true</span><span class="p">;</span> <span class="p">}</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">COMMA</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;,&#39;</span><span class="w"> </span><span class="p">{</span> <span class="n">valueMode</span> <span class="o">=</span> <span class="kp">true</span><span class="p">;</span> <span class="p">}</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="nl">PIPE</span><span class="w">			</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;|&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+
+<span class="k">fragment</span><span class="w"> </span><span class="nl">NAME_CHAR</span><span class="w">	</span><span class="p">:</span><span class="w"> </span><span class="no">ALPHA</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="no">DIGIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;_&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="k">fragment</span><span class="w"> </span><span class="nl">ALPHA</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;A&#39;</span><span class="o">..</span><span class="s">&#39;Z&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;a&#39;</span><span class="o">..</span><span class="s">&#39;z&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="k">fragment</span><span class="w"> </span><span class="nl">DIGIT</span><span class="w">		</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0&#39;</span><span class="o">..</span><span class="s">&#39;9&#39;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</body>
+</html>
