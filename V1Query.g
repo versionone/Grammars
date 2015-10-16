@@ -119,8 +119,6 @@ attribute_name :
  * Count :			Count the returned assets
  * DistinctCount :	Count the returned assets, ensuring each asset is 
  * 						counted only once
- * Min : 			Find the least value from the returned values
- * Max :			Find the greatest value from the returned values
  * MinDate :		Find the oldest date from the returned values
  * MaxDate :		Find the newest date from the returned values
  * And :			Returns true if all the returned values are true
