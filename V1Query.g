@@ -219,7 +219,7 @@ simple_filter_term
 	| unary_operator attribute_name
 	;
 
-binary_operator		: EQ | NE | LT | LTE | GT | GTE ;
+binary_operator		: EQ | NE | LT | LTE | GT | GTE | LIKE ;
 
 unary_operator		: PLUS | MINUS ;
 
@@ -266,6 +266,7 @@ GT			: '>' ;
 GTE			: '>=' ;
 PLUS			: '+' ;
 MINUS			: '-' ;
+LIKE			: '~=';
 
 HASH			: '#' ;
 PIPE			: '|' ;
