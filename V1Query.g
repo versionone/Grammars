@@ -8,7 +8,7 @@
 
 grammar V1Query;
 /*
- * Although most grammars would have a single root, this file contains 3 roots 
+ * Although most grammars would have a single root, this file contains 4 roots 
  * that share most of their productions:
  *    attribute_selection_token
  *    filter2_token
@@ -21,6 +21,15 @@ grammar V1Query;
  * Attribute references are comma separated.
  * EXAMPLE:
  * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Story?sel=Name,Number
+ *
+ * IMPLEMENTATION NOTES (the server, not this grammar, is authoritative):
+ * - The server also accepts the alias `select`; when both `sel` and `select`
+ *   are present, `select` wins.
+ * - An omitted selection does not return every attribute. It falls back to a
+ *   per-asset-type basic set.
+ * - Selecting a relation attribute implicitly also selects the related
+ *   asset's Name and ShortName attributes (when the related type has them)
+ *   and its DisplayBy attribute (when the relation defines one).
  */
 attribute_selection_token
 	: ( attribute_name ( COMMA attribute_name)* )? EOF
@@ -31,6 +40,16 @@ attribute_selection_token
  * for a list of assets.
  * EXAMPLE:
  * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Story?where=ToDo='0' 
+ *
+ * IMPLEMENTATION NOTES:
+ * - The wire query parameter for this token is `where`. "Filter2" is an
+ *   internal type name that never appears on the wire; rest-1.v1 has no
+ *   `filter=` parameter.
+ * - On a single-asset URL (/Data/{Type}/{id}), `where`, `sort`, `page` and
+ *   `find` are silently discarded, while `sel`, `with`, `deleted`,
+ *   `needTotal` and `asof` still take effect.
+ * - The server supports further parameters these grammars do not cover:
+ *   find, findin, asof, deleted, needTotal.
  */
 filter2_token
 	: filter_expression? EOF
@@ -42,6 +61,10 @@ filter2_token
  * Attribute references are comma separated, as in the following example.
  * EXAMPLE:
  * https://www14.v1host.com/v1sdktesting/rest-1.v1/Data/Story?sort=Estimate,Name
+ *
+ * IMPLEMENTATION NOTE: on a history request with no sort token, the server
+ * adds an implicit ascending sort on Moment. Supplying your own sort replaces
+ * it, so a sorted history response is no longer guaranteed chronological.
  */
 sort_token
 	: ( sort_token_term ( COMMA sort_token_term )* )? EOF

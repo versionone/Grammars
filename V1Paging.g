@@ -7,6 +7,11 @@
  */
 
 grammar V1Paging;
+/*
+ * IMPLEMENTATION NOTE: the server applies no default page size. A request
+ * without a page token returns the entire result set (the response reports
+ * pageSize="2147483647"). Always send an explicit page on list queries.
+ */
 
 /*
  * A paging parameter is used to indicate how many assets you want to retrieve 
