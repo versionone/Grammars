@@ -131,17 +131,19 @@ asset_type_token	: NAME ;
 attribute_name :
 	attribute_name_part 		// name part
 	(DOT attribute_name_part)* 	// any number of dot separated name parts
-	(DOT_AT aggregation_name)?	// optional aggretation
+	(DOT_AT aggregation_name)?	// optional aggregation
 	;
 
 /*
  * An aggregation is a simple mathematical function that returns a single value 
- * from the selected attribute values. The following aggretation types are 
+ * from the selected attribute values. The following aggregation types are 
  * defined:
  * Sum :			Sum the returned values
  * Count :			Count the returned assets
  * DistinctCount :	Count the returned assets, ensuring each asset is 
  * 						counted only once
+ * Any :			Returns true if the set is non-empty (a count > 0 test 
+ * 						on a relation)
  * MinDate :		Find the oldest date from the returned values
  * MaxDate :		Find the newest date from the returned values
  * And :			Returns true if all the returned values are true
